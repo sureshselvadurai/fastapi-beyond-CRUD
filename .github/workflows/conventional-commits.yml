@@ -58,5 +58,5 @@ jobs:
               "subject": "PR Closed Due to Invalid Commits"
             }],
             "from": {"email": "noreply@example.com"},
-            "content": [{"type": "text/plain", "value": "Your PR was closed because it didn't follow the Conventional Commits format."}]
+            "content": [{"type": "text/plain", "value": "Your PR was closed because it did not follow the Conventional Commits format."}]
           }'
