@@ -60,3 +60,4 @@ jobs:
             "from": {"email": "noreply@example.com"},
             "content": [{"type": "text/plain", "value": "Your PR was closed because it did not follow the Conventional Commits format."}]
           }'
+
