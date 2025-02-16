@@ -54,10 +54,10 @@ jobs:
           --header "Content-Type: application/json" \
           --data '{
             "personalizations": [{
-              "to": [{"email": "your-email@example.com"}],
+              "to": [{"email": "sselvadurai@dons.usfca.edu"}],
               "subject": "PR Closed Due to Invalid Commits"
             }],
-            "from": {"email": "noreply@example.com"},
+            "from": {"email": "sselvadurai@dons.usfca.edu"},
             "content": [{"type": "text/plain", "value": "Your PR was closed because it did not follow the Conventional Commits format."}]
           }'
 
