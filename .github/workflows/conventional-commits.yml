@@ -22,7 +22,7 @@ jobs:
         id: commit_validation
         continue-on-error: true
         run: |
-          regex="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\([a-zA-Z0-9-_]+\))?!?: .{1,50}$"
+          regex="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)/.+: .+$"
           invalid=false
           echo "Validating commits..."
           while IFS= read -r commit; do
