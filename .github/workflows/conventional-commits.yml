@@ -1,0 +1,37 @@
+name: Conventional Commits Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  commit-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get PR Commits
+        run: |
+          PR_COMMITS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/commits" \
+          | jq -r '.[].commit.message')
+          echo "$PR_COMMITS" > commit_messages.txt
+
+      - name: Validate Commit Messages
+        run: |
+          regex="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\(.+\))?!?: .{1,50}$"
+          while IFS= read -r commit; do
+            if ! [[ "$commit" =~ $regex ]]; then
+              echo "Invalid commit message: $commit"
+              exit 1
+            fi
+          done < commit_messages.txt
+
+      - name: Close PR if invalid commit messages
+        if: failure()
+        run: |
+          curl -X PATCH -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}" \
+          -d '{"state": "closed"}'
