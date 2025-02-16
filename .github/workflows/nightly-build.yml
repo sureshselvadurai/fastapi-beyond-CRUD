@@ -2,7 +2,7 @@ name: Nightly Build
 
 on:
   schedule:
-    - cron: '50 2 * * *'  # Runs at 2:40 AM UTC (6:40 PM PST)
+    - cron: '54 2 * * *'  # Runs at 2:40 AM UTC (6:40 PM PST)
   workflow_dispatch:  # Allow manual trigger of the workflow
 
 jobs:
@@ -21,7 +21,18 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest  # Ensure pytest is installed
+          pip install pytest python-dotenv  # Install python-dotenv to load the .env file
+
+      - name: Load Environment Variables from .env
+        run: |
+          if [ -f .env ]; then
+            echo "Loading environment variables from .env file"
+            set -a
+            source .env
+            set +a
+          else
+            echo ".env file not found, skipping..."
+          fi
 
       - name: Run Tests
         run: |
