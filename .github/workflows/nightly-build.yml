@@ -2,8 +2,9 @@ name: Nightly Build
 
 on:
   schedule:
-    - cron: '47 6 * * *'
-  workflow_dispatch:
+    - cron: '50 2 * * *'  # Runs at 2:40 AM UTC (6:40 PM PST)
+  workflow_dispatch:  # Allow manual trigger of the workflow
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -20,6 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           pip install -r requirements.txt
+          pip install pytest  # Ensure pytest is installed
 
       - name: Run Tests
         run: |
