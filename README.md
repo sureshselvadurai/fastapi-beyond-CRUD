@@ -77,4 +77,4 @@ pytest
 ```
 
 ## Contributing
-I welcome contributions to improve the documentation! 
+I welcome contributions to improve the documentation.
