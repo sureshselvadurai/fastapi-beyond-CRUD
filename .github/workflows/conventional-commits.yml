@@ -22,9 +22,11 @@ jobs:
         id: commit_validation
         continue-on-error: true
         run: |
-          regex="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\(.+\))?!?: .{1,50}$"
+          regex="^(feat|fix|docs|style|refactor|perf|test|chore|ci|build)(\([a-zA-Z0-9-_]+\))?!?: .{1,50}$"
           invalid=false
+          echo "Validating commits..."
           while IFS= read -r commit; do
+            echo "Validating: $commit"  # Debugging: print commit message
             if ! [[ "$commit" =~ $regex ]]; then
               echo "Invalid commit message: $commit"
               invalid=true
@@ -60,4 +62,3 @@ jobs:
             "from": {"email": "sselvadurai@dons.usfca.edu"},
             "content": [{"type": "text/plain", "value": "Your PR was closed because it did not follow the Conventional Commits format."}]
           }'
-
