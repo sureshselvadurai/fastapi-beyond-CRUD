@@ -2,7 +2,7 @@ name: Nightly Build
 
 on:
   schedule:
-    - cron: '2 1 * * *'
+    - cron: '8 1 * * *'
   workflow_dispatch:
 
 jobs:
