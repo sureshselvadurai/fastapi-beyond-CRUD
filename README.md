@@ -78,3 +78,12 @@ pytest
 
 ## Contributing
 I welcome contributions to improve the documentation.
+
+## Workflow:
+- Conventional Commits: GitHub Actions verify PRs follow the Conventional Commits spec. Non-compliant PRs are closed with a failure notification.
+- Nightly Builds: Create nightly builds (12 am) from main, pushing to a container registry. If tests fail, the build fails, isn’t stored, and users are notified.
+- Email Notifications: Use SendGrid or Ethereal to send emails.
+- Docker Setup: No extra downloads required. 
+
+Use:
+docker compose up
